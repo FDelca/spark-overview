@@ -1,0 +1,142 @@
+
+First half of the course:  -------------- IMPORTANT
+- Spark with Big Data basics
+- Setting up Spark in various ways
+- Python Crash Course
+- Python and Spark 2.0 DataFrames
+- PySpark Project Exercise
+
+Second half of the course:
+- Introduction to Machine Learning
+- Linear Regression
+- Logistic Regression
+- Decision Trees and Random Forest
+- Gradient Boosted Trees
+- k-means Clustering
+- Recommender Systems;
+- NLP
+- Spark Streaming (Local and Twitter) ---- ALSO IMPORTANT
+
+
+### What spark is? 
+
+- What is big data?
+
+But what can we do if we have a larger set of data?
+	Try using a SQL database to move storage onto hard drive instead of RAM	
+	Or use a distributed system, that distributes the data to multiple machines/computer.
+
+
+- Explanation of Hadoop, MapReduce, and Spark
+
+- Local vs Distributed Systems
+
+	Local - will use the computation resources of a single machine
+	Distributed Systems 
+		- has access to the computational resources across a number of machines connected through a network.
+		- After a certain point, it is easier to scale out to many lower CPU machines, than to try to scale up to a single machine with a high CPU.
+		- Easily scaling
+		- Fault tolerance, if one machine fails, the whole network can still go on;
+
+- Overview of Hadoop Ecosystem
+
+	**Hadoop**
+	- Distributes very large files across multiple machines
+	
+	**Hadoop Distributed File System - HDFS**
+	- allows a user to work with large data sets
+	- duplicates blocks of data for fault tolerance
+	- It uses **MapReduce** that allows computations across a distributed data set
+
+	- It will use blocks of data, with a size of 128 MB by default;
+	- Each of these blocks is replicated 3 times
+	- Distributes in a way to support fault tolerance
+	- Smaller blocks provide more parallelization during processing
+	- Multiples copies of a block prevent loss of data due to a failure of a node
+	
+	It is composed by: Name Node and several Data Node, each one with CPU and RAM
+	
+	
+	**MapReduce**
+	- is a way of splitting a computation task to a distributed set of files (such as HDFS)
+	- it consists of a Job Tracker and multiple Task Trackers
+	- Job Tracker sends code to run on the Task Trackers. 
+	- The Task Trackers allocate CPU and memory for the tasks and monitor the tasks on the worker nodes
+
+	# Recap:
+	- Using HDFS to distribute large data sets
+	- Using MapReduce to distribute a computational task to a distributed data set
+
+- Overview of Spark
+
+	**Topics**
+	- Spark
+	- Spark vs. MapReduce
+	- Spark RDDs
+	- Spark DataFrames
+
+	**Spark**
+	- Is one of the latest technologies being used to quickly and easily handle Big Data
+	- Open source project on Apache
+	- Ease of use and speed
+
+	**Spark vs. MapReduce**
+	- You can think of Spark as a flexible alternative to MapReduce, one should not compare spark with hadoop.
+	- Can use data stored in a variety of formats
+		- AWS S3, HDFS, Cassandra, etc
+	- MapReduce requires files to be stored in HDFS, Spark does not!
+	- Spark also can perform operations up to 100x faster than MapReduce
+		
+		**So how does it achieve this speed?**
+		- MapReduce writes most data to disk after each map and reduce operation
+		- Spark keeps most of data in memory after each transformation
+		- Spark can spill over to disk if the memory is filled
+
+	**Spark RDDs**
+	- At the core of Spark is the idea of a Resilient Distributed Dataset (RDD)
+	- It has 4 main features:
+		- Distributed collection of data
+		- Fault-tolerant
+		- Parallel operation - partioned
+		- Ability to use many data sources
+	
+	- It consists of one Driver Program (SparkContext) <-> 1 Cluster Manager <-> Several Worker Nodes(Executer and Cache)
+
+	- They are immutable, lazily evaluated, and cacheable
+	- Two types of operations:
+		1. Transformations - recipe to follow
+		2. Actions - performs what the recipe says to do and returns something back
+	- One writes a method (transformation) but one cannot see anything because to see you need to perform an action
+	- With the release of Spark 2.0, Spark is moving towards a DataFrame based syntax, but keep in mind that the way files are being distributed can still be thought of as RDDs, it is just the typed out syntax that is changing;
+
+	**Spark DataFrames**
+	- Are the standard way of using spark's machine learning capabilities
+	- Documentation: https://spark.apache.org/
+	
+	- Spark is written in scala, scala is written in java, so the more advance stuff is first released in scala, then in java, and afterwards in python and r.
+
+
+### Setup environment
+
+	- Realistically spark won't be running on a single machine, it will run on a cluster on a service, like AWS
+		- We will do the exercises on a single machine
+	- These cluster services will pretty much always be a Linux based system
+	- Linux command line is essential to getting spark going in the "real-world"
+	
+	Several options: - All of them are OS system agnostic
+	1. Ubuntu+Spark+Python on VirtualBox - we will use this one
+	2. Amazon EC2 with Python and Spark
+	3. Databricks Notebook System - It is not free anymore
+	4. AWS EMR Notebook (not free!)
+
+	I will use option 1
+	
+
+
+
+	
+
+	
+
+
+	

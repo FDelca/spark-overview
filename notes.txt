@@ -116,7 +116,7 @@ But what can we do if we have a larger set of data?
 	- Spark is written in scala, scala is written in java, so the more advance stuff is first released in scala, then in java, and afterwards in python and r.
 
 
-### Setup environment
+### Setup environment - We can do this using a docker container with spark + jupyter
 
 	- Realistically spark won't be running on a single machine, it will run on a cluster on a service, like AWS
 		- We will do the exercises on a single machine
@@ -129,8 +129,44 @@ But what can we do if we have a larger set of data?
 	3. Databricks Notebook System - It is not free anymore
 	4. AWS EMR Notebook (not free!)
 
-	I will use option 1
+	I will use option 1:
 	
+	
+	## Instructions:
+	- Use python3.7
+	- Install jupyter notebook
+	- Then update sudo - `sudo apt update`
+	- Install java - `sudo apt-get install default-jre`
+		       - `java -version`
+	- Install Scala - `sudo apt-get install scala`
+			- `scala -version`
+	- Install py4j - Which connects python with scala and java
+			- `pip install py4j`
+	- Install spark version - 2.1.2/2.1.0 - https://archive.apache.org/dist/spark/spark-2.1.2/
+		Then in the folder where it was downloaded open a command line and type:
+			- `sudo tar -zxvf spark-2.1.2-bin-hadoop2.7.tgz` - unzip
+		Then make it available to python:
+			- `export SPARK_HOME='home/fdelca/spark/spark-2.1.2-bin-hadoop2.7'`
+			- `export PATH=$SPARK_HOME:$PATH`
+			- `export PYTHONPATH=$SPARK_HOME/python:$PYTHONPATH`
+			- `export PYSPARK_DRIVER_PYTHON="jupyter"`
+			- `export PYSPARK_DRIVER_PYTHON_OPTS="notebook"`
+			- `export PYSPARK_PYTHON=python3`
+		Change permissions:
+			- `sudo chmod 777 ~/Documents/spark/spark-2.1.2-bin-hadoop2.7` - I don't know if it is necessary
+			- If there is locked folders one should : `sudo chmod 777 ~/Documents/spark/<foldertounlock>`
+				
+		You can then start a jupyter notebook inside the folder of `~/Documents/spark/spark-2.1.2-bin-hadoop2.7/python` and use the pyspark installed
+		
+	- How to import spark from every directory - This command should be run in the beginning of the notebook
+		- `pip install findspark`
+		- go into spark directory, copy the pwd `/home/fdelca/Documents/spark/spark-2.1.2-bin-hadoop2.7`
+			Open a python in your home directory
+			- import findspark
+			Give the path of spark folder to the findspark:
+			- findspark.init('/home/fdelca/Documents/spark/spark-2.1.2-bin-hadoop2.7')
+			This way you can access spark
+			
 
 
 
